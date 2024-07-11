@@ -94,8 +94,8 @@
 import { load } from "protobufjs";
 import {onMounted, reactive, ref} from 'vue'
 
-const wsUrl = ref("ws://192.168.0.244:16851/api/user/ws")
-// const wsUrl = ref("ws://127.0.0.1:16851/api/user/ws")
+// const wsUrl = ref("ws://192.168.0.244:16851/api/user/ws")
+const wsUrl = ref("ws://127.0.0.1:16851/api/user/ws")
 
 // 登录成功登录后获取到的sessionId
 const sessionId = ref('')

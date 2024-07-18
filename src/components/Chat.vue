@@ -45,7 +45,7 @@
               <el-radio value=3>3文件消息</el-radio>
               <el-radio value=4>4语言消息</el-radio>
               <el-radio value=5>5视频消息</el-radio>
-              <el-radio value=6>6广告消息</el-radio>
+              <el-radio value=6>6推送消息</el-radio>
               <el-radio value=7>7系统消息</el-radio>
               <el-radio value=8>8心跳检测</el-radio>
             </el-radio-group>

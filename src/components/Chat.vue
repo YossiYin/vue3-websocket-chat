@@ -8,7 +8,7 @@
           <h3>聊天测试</h3>
         </div>
         <el-space direction="horizontal" alignment="start" :size="10">
-          <el-button type="success" @click="login()">登录建立连接</el-button>
+          <el-button type="success" @click="connectWs()">建立ws连接</el-button>
         </el-space>
         <div style="margin-top: 20px;"></div>
         <!-- 表单  -->
@@ -162,7 +162,7 @@ const sendMsg = () => {
   socket!.send(buffer);
 }
 // 发送消息
-function login(){
+function connectWs(){
   console.log("sessionId=" + sessionId.value)
   // 创建WebSocket连接
   socket = new WebSocket(wsUrl.value);
@@ -187,16 +187,16 @@ function login(){
       console.error("WebSocket 连接已关闭");
     }
   };
-  // 开始登录
-  let message = ChatMessage.create({ content: "登录"
-  , type: 1, status: 0, id: 1, fromUserId: 1, toUserId: 2, sendTime: 1 });
-
-  console.log(`登录的chatMessage = ${JSON.stringify(message)}`);
-  // 编码为传输数据
-  let buffer = ChatMessage.encode(message).finish();
-
-  // 发送编码后的数据
-  socket!.send(buffer);
+  // // 开始登录
+  // let message = ChatMessage.create({ content: "登录"
+  // , type: 1, status: 0, id: 1, fromUserId: 1, toUserId: 2, sendTime: 1 });
+  //
+  // console.log(`登录的chatMessage = ${JSON.stringify(message)}`);
+  // // 编码为传输数据
+  // let buffer = ChatMessage.encode(message).finish();
+  //
+  // // 发送编码后的数据
+  // socket!.send(buffer);
 }
 
 // 处理服务器传来的数据

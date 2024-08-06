@@ -1,18 +1,20 @@
 // 协议版本
 syntax = "proto3";
-package awesomepackage;
+
 // 定义java包目录
-option java_package = "com.yen.model.proto";
+option java_package = "com.tuorong.dto.user.proto";
 // 定义生成的java外部类名
 option java_outer_classname = "ChatMessageProto";
 
 // 数据交流对象(内部类)
 message ChatMessage {
-  int64 fromUserId = 1;      // 发送者ID
-  int64 toUserId = 2;        // 接收者ID
+  string fromUserId = 1;      // 发送者ID
+  string toUserId = 2;        // 接收者ID
   string content = 3;         // 消息内容
-  string sendTime = 4;        // 发送时间,格式(yyyy-MM-dd HH:mm:ss)
-  int32 type = 5;             // 消息类型(0建立连接|1文本消息|2图片消息|3文件消息|4语音消息|5视频消息|6广告消息|7系统消息|8心跳检测)
+  int64 sendTime = 4;         // 消息发送时间,形式:秒级时间戳
   int32 status = 6;           // 状态(0已发送|1已读|2发送失败|3已撤回)
-  int64 id = 7;               // 消息唯一标识符(数据库自增生成)
+  int32 type = 5;             // 消息类型(0建立连接|1文本消息|2图片消息|3文件消息|4语音消息|5视频消息|6推送消息|7系统消息|8心跳检测)
+  string quote = 7;           // 引用内容
+  string extend = 8;          // 扩展字段
+  string id = 9;               // 消息唯一标识符(数据库自增生成)
 }

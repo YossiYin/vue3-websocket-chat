@@ -39,7 +39,7 @@
 
           <el-form-item label="消息类型(type)">
             <el-radio-group v-model="form.type">
-              <el-radio value=0>0建立连接</el-radio>
+              <el-radio value=0>0登录并建立连接</el-radio>
               <el-radio value=1>1文本消息</el-radio>
               <el-radio value=2>2图片消息</el-radio>
               <el-radio value=3>3文件消息</el-radio>
@@ -58,6 +58,14 @@
               <el-radio value=2>2发送失败</el-radio>
               <el-radio value=3>3已撤回</el-radio>
             </el-radio-group>
+          </el-form-item>
+
+          <el-form-item label="引用内容">
+            <el-input v-model="form.quote" />
+          </el-form-item>
+
+          <el-form-item label="扩展字段内容">
+            <el-input v-model="form.extend" />
           </el-form-item>
 
           <el-form-item label="消息唯一标识符(id)">
@@ -81,6 +89,8 @@
           <el-table-column prop="sendTime" label="发送时间" width="150" />
           <el-table-column prop="type" label="类型" width="50" />
           <el-table-column prop="status" label="状态" width="50" />
+          <el-table-column prop="quote" label="引用内容" width="50" />
+          <el-table-column prop="extend" label="扩展内容" width="50" />
           <el-table-column prop="id" label="ID"/>
         </el-table>
       </el-main>
@@ -106,13 +116,15 @@ let ChatMessage: any = null;
 let serverMessages = ref<ServerMessage[]>([]);
 // 消息数据结构
 interface ServerMessage {
-  fromUserId: number;
-  toUserId: number;
+  fromUserId: string;
+  toUserId: string;
   content: string;
   sendTime: string;
   type: number;
   status: number;
-  id: number;
+  quote: string;
+  extend: string;
+  id: string;
 }
 
 let form = reactive({
@@ -122,6 +134,8 @@ let form = reactive({
   sendTime: '',
   type: '',
   status: '',
+  quote: '',
+  extend: '',
   id: '',
 })
 
@@ -140,13 +154,15 @@ onMounted(() => {
 const sendMsg = () => {
   // 转换响应式对象为普通对象
   let customMessage = {
-    fromUserId: parseInt(form.fromUserId), // 确保fromUserId为整数
-    toUserId: parseInt(form.toUserId), // 确保toUserId为整数
+    fromUserId: form.fromUserId,
+    toUserId: form.toUserId,
     content: form.content,
-    sendTime: form.sendTime, // 确保sendTime为整数
+    sendTime: parseInt(form.sendTime), // 确保sendTime为整数
     type: parseInt(form.type), // 确保类型为整数
     status: parseInt(form.status), // 确保状态为整数
-    id: parseInt(form.id), // 确保ID为整数
+    quote: form.quote,
+    extend: form.extend,
+    id: form.id,
   };
 
   let message = ChatMessage.create(customMessage);
@@ -218,6 +234,8 @@ async function handleMessage(data: Blob) {
       sendTime: message.sendTime,
       type: message.type,
       status: message.status,
+      quote: message.quote,
+      extend: message.extend,
       id: message.id,
     });
 

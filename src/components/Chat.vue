@@ -48,6 +48,9 @@
               <el-radio value=6>6推送消息</el-radio>
               <el-radio value=7>7系统消息</el-radio>
               <el-radio value=8>8心跳检测</el-radio>
+              <el-radio value=9>9撤回类型</el-radio>
+              <el-radio value=10>10表情包</el-radio>
+              <el-radio value=11>11名片</el-radio>
             </el-radio-group>
           </el-form-item>
 
@@ -57,6 +60,8 @@
               <el-radio value=1>1已读</el-radio>
               <el-radio value=2>2发送失败</el-radio>
               <el-radio value=3>3已撤回</el-radio>
+              <el-radio value=4>4待发送</el-radio>
+              <el-radio value=5>5已读的语音</el-radio>
             </el-radio-group>
           </el-form-item>
 
